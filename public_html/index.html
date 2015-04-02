@@ -6,11 +6,146 @@ and open the template in the editor.
 -->
 <html>
   <head>
-    <title>TODO supply a title</title>
+    <title>Barbadine</title>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script>
+
+      function validateForm(){
+        if(checkCheckbox() == false) {
+          return false;
+        }
+        if(checkNumberFormat() == false) {
+          return false;
+        }
+        return true;
+      }
+
+      function checkCheckbox(){
+        if(document.getElementById('tnc').checked){
+          return checkNumberFormat();
+        }
+        alert('Πριν προχωρήσετε, πρέπει να αποδεχτείτε τους Όρους Παροχής Υπηρεσιών');
+        return false;
+      }
+
+      function checkNumberFormat(){
+        var phoneNumber = document.getElementById('phoneNumber').value.length;
+        if(phoneNumber < 10){
+          alert('Εισάγετε το κινητό σας νούμερο και προστατέψτε το κινητό σας');
+          return false;
+        }
+        return true;
+      }
+    </script>
+    
+    <style>
+      #tnc_box { 
+          border: 2px solid #888;
+          float: left;
+          padding: 1px;
+          margin: 5px;
+      }
+
+      #tnc[type=checkbox]:checked ~ #tnc_box #tnc_label{
+          background: url(/img/checked.png);
+          background-size: 100%;
+      }
+
+      #tnc_label {
+          background: #e0e0e0;
+          height: 20px;
+          width: 20px;
+          display: block;
+      }
+      #tnc_label:hover {
+          background: #c0c0c0;
+      }
+    </style>
   </head>
   <body>
-    <div>TODO write content</div>
+    <h1>Barbadine</h1>
+    
+  
+    <form action="<?php echo $this->baseUrl; ?>submitphoneforpin/" 
+          method="POST" 
+          id="signUpForm" 
+          onsubmit="return validateForm();" >
+      
+      <div id="field_content">
+        <table id="field_table">
+          <tr>
+            <td class="ft_left">
+              <img src="/design_schemas/antivirus_gr/images/phone.png" 
+                   alt="Protect Your Android Now" 
+                   width="100%">
+            </td>
+				
+            <td class="ft_right">
+              <div id="arrow">
+                <img src="/design_schemas/antivirus_gr/images/arrow.gif" />
+              </div>
+					
+              <div id="header_question">Εισάγετε τον αριθμό του κινητού σας:</div>
+              
+              <div id="form_field">
+                <input type="tel" 
+                       name="n" 
+                       id="phoneNumber" 
+                       class="form_input" 
+                       placeholder="Mobile Number" 
+                       required 
+                       value="69" 
+                       maxlength="10" />
+                
+                <div id="checkbox">
+							
+                  <table style="margin:0 auto;font-size:10px;line-height:1em;color:00FF00;">
+                    <tbody>
+								
+                      <tr>
+                        
+                        <td style="vertical-align: top;">
+                          
+                          <input type="checkbox" value="1" name="tnc" id="tnc" style="display:none;"/>
+                          <div id="tnc_box">
+                            <label id="tnc_label" for="tnc"></label>
+                          </div>
+                          
+                        </td>
+									
+                        <td style="padding-left:0px;vertical-align:middle;">
+                          
+                          <label for="tnc">Έχω λάβει γνώση των όρων χρήσης και αποδέχομαι να ενεργοποιήσω τη συνδρομητική υπηρεσία Moschields με χρέωση δύο ευρώ και επτά λεπτά ανά SMS, τρία SMS ανά εβδομάδα ή μηδέν κόμμα πενήντα δύο λεπτά ανά SMS, 12 SMS ανά εβδομάδα.
+                          </label>
+                          
+                        </td>
+								
+                      </tr>
+							
+                    </tbody>
+                  </table>
+						
+                </div>
+                
+						
+                <button type="submit" 
+                        id="btnSubmit" 
+                        class="submit_button">ΣΥΝΕΧΕΙΑ</button>
+					
+              </div>
+				
+            </td>
+			
+          </tr>
+		
+        </table>
+	
+      </div>
+	
+    </form>
+
+
+    
   </body>
 </html>
